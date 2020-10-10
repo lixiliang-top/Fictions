@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kgc.mapper.ChapterMapper" >
+  <resultMap id="BaseResultMap" type="cn.kgc.pojo.Chapter" >
+    <id column="chaid" property="chaid" jdbcType="INTEGER" />
+    <result column="bookid" property="bookid" jdbcType="INTEGER" />
+    <result column="aid" property="aid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="titles" property="titles" jdbcType="VARCHAR" />
+    <result column="tothereader" property="tothereader" jdbcType="VARCHAR" />
+    <result column="releasepattern" property="releasepattern" jdbcType="INTEGER" />
+    <result column="releaseway" property="releaseway" jdbcType="INTEGER" />
+    <result column="savethetype" property="savethetype" jdbcType="VARCHAR" />
+    <result column="savetime" property="savetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    chaid, bookid, aid, title, titles, tothereader, releasepattern, releaseway, savethetype, 
+    savetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kgc.pojo.ChapterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from chapter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from chapter
+    where chaid = #{chaid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from chapter
+    where chaid = #{chaid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.kgc.pojo.ChapterExample" >
+    delete from chapter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.kgc.pojo.Chapter" >
+    insert into chapter (chaid, bookid, aid, 
+      title, titles, tothereader, 
+      releasepattern, releaseway, savethetype, 
+      savetime)
+    values (#{chaid,jdbcType=INTEGER}, #{bookid,jdbcType=INTEGER}, #{aid,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{titles,jdbcType=VARCHAR}, #{tothereader,jdbcType=VARCHAR}, 
+      #{releasepattern,jdbcType=INTEGER}, #{releaseway,jdbcType=INTEGER}, #{savethetype,jdbcType=VARCHAR}, 
+      #{savetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kgc.pojo.Chapter" >
+    insert into chapter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chaid != null" >
+        chaid,
+      </if>
+      <if test="bookid != null" >
+        bookid,
+      </if>
+      <if test="aid != null" >
+        aid,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="titles != null" >
+        titles,
+      </if>
+      <if test="tothereader != null" >
+        tothereader,
+      </if>
+      <if test="releasepattern != null" >
+        releasepattern,
+      </if>
+      <if test="releaseway != null" >
+        releaseway,
+      </if>
+      <if test="savethetype != null" >
+        savethetype,
+      </if>
+      <if test="savetime != null" >
+        savetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chaid != null" >
+        #{chaid,jdbcType=INTEGER},
+      </if>
+      <if test="bookid != null" >
+        #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="aid != null" >
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="titles != null" >
+        #{titles,jdbcType=VARCHAR},
+      </if>
+      <if test="tothereader != null" >
+        #{tothereader,jdbcType=VARCHAR},
+      </if>
+      <if test="releasepattern != null" >
+        #{releasepattern,jdbcType=INTEGER},
+      </if>
+      <if test="releaseway != null" >
+        #{releaseway,jdbcType=INTEGER},
+      </if>
+      <if test="savethetype != null" >
+        #{savethetype,jdbcType=VARCHAR},
+      </if>
+      <if test="savetime != null" >
+        #{savetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kgc.pojo.ChapterExample" resultType="java.lang.Integer" >
+    select count(*) from chapter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update chapter
+    <set >
+      <if test="record.chaid != null" >
+        chaid = #{record.chaid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookid != null" >
+        bookid = #{record.bookid,jdbcType=INTEGER},
+      </if>
+      <if test="record.aid != null" >
+        aid = #{record.aid,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titles != null" >
+        titles = #{record.titles,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tothereader != null" >
+        tothereader = #{record.tothereader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releasepattern != null" >
+        releasepattern = #{record.releasepattern,jdbcType=INTEGER},
+      </if>
+      <if test="record.releaseway != null" >
+        releaseway = #{record.releaseway,jdbcType=INTEGER},
+      </if>
+      <if test="record.savethetype != null" >
+        savethetype = #{record.savethetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.savetime != null" >
+        savetime = #{record.savetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update chapter
+    set chaid = #{record.chaid,jdbcType=INTEGER},
+      bookid = #{record.bookid,jdbcType=INTEGER},
+      aid = #{record.aid,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      titles = #{record.titles,jdbcType=VARCHAR},
+      tothereader = #{record.tothereader,jdbcType=VARCHAR},
+      releasepattern = #{record.releasepattern,jdbcType=INTEGER},
+      releaseway = #{record.releaseway,jdbcType=INTEGER},
+      savethetype = #{record.savethetype,jdbcType=VARCHAR},
+      savetime = #{record.savetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.kgc.pojo.Chapter" >
+    update chapter
+    <set >
+      <if test="bookid != null" >
+        bookid = #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="aid != null" >
+        aid = #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="titles != null" >
+        titles = #{titles,jdbcType=VARCHAR},
+      </if>
+      <if test="tothereader != null" >
+        tothereader = #{tothereader,jdbcType=VARCHAR},
+      </if>
+      <if test="releasepattern != null" >
+        releasepattern = #{releasepattern,jdbcType=INTEGER},
+      </if>
+      <if test="releaseway != null" >
+        releaseway = #{releaseway,jdbcType=INTEGER},
+      </if>
+      <if test="savethetype != null" >
+        savethetype = #{savethetype,jdbcType=VARCHAR},
+      </if>
+      <if test="savetime != null" >
+        savetime = #{savetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where chaid = #{chaid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.kgc.pojo.Chapter" >
+    update chapter
+    set bookid = #{bookid,jdbcType=INTEGER},
+      aid = #{aid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      titles = #{titles,jdbcType=VARCHAR},
+      tothereader = #{tothereader,jdbcType=VARCHAR},
+      releasepattern = #{releasepattern,jdbcType=INTEGER},
+      releaseway = #{releaseway,jdbcType=INTEGER},
+      savethetype = #{savethetype,jdbcType=VARCHAR},
+      savetime = #{savetime,jdbcType=TIMESTAMP}
+    where chaid = #{chaid,jdbcType=INTEGER}
+  </update>
+</mapper>
